@@ -1,0 +1,41 @@
+{
+	"extends": "airbnb",
+	"globals": {
+		"__DEV__": true
+	},
+	"rules": {
+		"react/jsx-quotes": 0,
+		"jsx-quotes": [2, "prefer-double"],
+		"no-mixed-spaces-and-tabs": [2, "smart-tabs"],
+		"comma-dangle": [0, "always-multiline"],
+		"indent": [2, "tab"],
+		"babel/generator-star-spacing": 1,
+		"babel/new-cap": 1,
+		"babel/object-curly-spacing": 1,
+		"babel/object-shorthand": 1,
+		"babel/arrow-parens": 0,
+        "require-yield": 1,
+        "generator-star-spacing": 2,
+	},
+	"ecmaFeatures": {
+		"arrowFunctions": false,
+		"blockBindings": true,
+		"classes": true,
+		"defaultParams": true,
+		"destructuring": true,
+		"forOf": true,
+		"generators": true,
+		"modules": true,
+		"objectLiteralComputedProperties": true,
+		"objectLiteralDuplicateProperties": true,
+		"objectLiteralShorthandMethods": true,
+		"objectLiteralShorthandProperties": true,
+		"spread": true,
+		"superInFunctions": true,
+		"templateStrings": true,
+		"jsx": true
+	},
+	"plugins": [
+		"babel"
+	]
+}

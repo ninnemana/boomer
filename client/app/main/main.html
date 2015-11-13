@@ -1,0 +1,28 @@
+<div class="container">
+    <form ng-submit="battle()">
+        <fieldset class="form-group">
+            <label for="endpoint1">First Endpoint</label>
+            <input type="text" ng-model="endpoint1" class="form-control" id="endpoint1" placeholder="First Endpoint">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="endpoint2">Second Endpoint</label>
+            <input type="text" ng-model="endpoint2" class="form-control" id="endpoint2" placeholder="Second Endpoint">
+        </fieldset>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Battle</button>
+    </form>
+</div>
+
+<div ng-if="response1 || response2" class="container-fluid row responses">
+    <div class="col-md-5">
+        <h3>First Endpoint</h3>
+        <em>{{ response1.endpoint }}</em>
+        <svg class="response2"></svg>
+    </div>
+
+    <div class="col-md-5 col-md-offset-1">
+        <h3>Second Endpoint</h3>
+        <em>{{ response2.endpoint }}</em>
+        <svg class="response2"></svg>
+    </div>
+</div>

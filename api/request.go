@@ -2,6 +2,7 @@ package api
 
 import (
 	"fmt"
+	"github.com/ninnemana/boom/boomer"
 	"net/http"
 	"net/url"
 	"regexp"
@@ -16,6 +17,9 @@ const (
 
 // Request ...
 type Request struct {
+	// url the make the requests against
+	Endpoint string `json:"endpoint"`
+
 	// number of requests to run
 	Requests int `json:"requests"`
 
@@ -66,6 +70,8 @@ type Request struct {
 	// NUmber of used CPU cores. (default for current machine is %d cores)
 	CPUs int `json:"cpus"`
 
+	Report *boomer.Report `json:"report"`
+
 	username string
 	password string
 	proxyURL *url.URL
@@ -78,6 +84,37 @@ type HTTPHeader struct {
 
 	// Value - "application/json"
 	Value string `json:"value"`
+}
+
+func (r *Request) Do() error {
+	req, err := http.NewRequest(r.Method, r.Endpoint, nil)
+	if err != nil {
+		return err
+	}
+
+	for _, h := range r.Headers {
+		req.Header.Add(h.Name, h.Value)
+	}
+	if r.username != "" && r.password != "" {
+		req.SetBasicAuth(r.username, r.password)
+	}
+	bmr := &boomer.Boomer{
+		Request:            req,
+		N:                  r.Requests,
+		C:                  r.ConcurrentRequests,
+		RequestBody:        r.Body,
+		Qps:                r.RateLimit,
+		Timeout:            r.Timeout,
+		AllowInsecure:      r.AllowInsecure,
+		DisableCompression: r.DisableCompression,
+		DisableKeepAlives:  r.DisableKeepAlive,
+		ProxyAddr:          r.proxyURL,
+		Output:             "csv",
+		ReadAll:            r.ReadAll,
+	}
+	r.Report = bmr.Run()
+
+	return nil
 }
 
 func (r *Request) validate() error {
