@@ -13,16 +13,16 @@
     </form>
 </div>
 
-<div ng-if="response1 || response2" class="container-fluid row responses">
-    <div class="col-md-5">
-        <h3>First Endpoint</h3>
-        <em>{{ response1.endpoint }}</em>
-        <svg class="response2"></svg>
-    </div>
+<div ng-if="response1" class="container responses">
+    <h3>First Endpoint</h3>
+    <em>{{ response1.endpoint }}</em>
+    <svg class="response2"></svg>
+</div>
 
-    <div class="col-md-5 col-md-offset-1">
-        <h3>Second Endpoint</h3>
-        <em>{{ response2.endpoint }}</em>
-        <svg class="response2"></svg>
-    </div>
+<hr>
+
+<div ng-if="response2" class="container responses">
+    <h3>Second Endpoint</h3>
+    <em>{{ response2.endpoint }}</em>
+    <svg class="response2"></svg>
 </div>

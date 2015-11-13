@@ -8,7 +8,11 @@ import (
 )
 
 var (
-	rndr = render.New(render.Options{})
+	rndr = render.New(render.Options{
+		Directory:     "dist/public",     // Specify what path to load the templates from.
+		Extensions:    []string{".html"}, // Specify extensions to load for templates.
+		IsDevelopment: true,              // Render will now recompile the templates on every HTML response.
+	})
 )
 
 func Options(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
@@ -16,7 +20,7 @@ func Options(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 }
 
 func UserInterface(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
-	rw.Write([]byte("display the ui"))
+	rndr.HTML(rw, http.StatusOK, "index", nil)
 }
 
 func Boomer(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {

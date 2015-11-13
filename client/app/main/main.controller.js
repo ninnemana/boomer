@@ -1,5 +1,7 @@
 'use strict';
 
+var API_BENCHMARK = '/bench';
+
 angular.module('boomerApp')
     .controller('MainCtrl', function($scope, $http) {
         $scope.awesomeThings = [];
@@ -24,7 +26,7 @@ angular.module('boomerApp')
             };
 
             $http({
-                url: 'http://localhost:8081/bench',
+                url: API_BENCHMARK,
                 method: 'post',
                 data: req1
             }).success(function(data) {
@@ -36,7 +38,7 @@ angular.module('boomerApp')
                 generateGraph(data.histogram, '.response1');
             });
             $http({
-                url: 'http://localhost:8081/bench',
+                url: API_BENCHMARK,
                 method: 'post',
                 data: req2
             }).success(function(data) {
